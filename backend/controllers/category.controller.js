@@ -1,6 +1,6 @@
 const Category = require("../models/category");
 
-// Add Category
+
 const addCategory = async (req, res) => {
   try {
     const { name } = req.body;
@@ -36,7 +36,7 @@ const addCategory = async (req, res) => {
   }
 };
 
-// Get All Categories
+
 const getCategories = async (req, res) => {
   try {
     const categories = await Category.find().sort({ createdAt: -1 });
@@ -53,7 +53,7 @@ const getCategories = async (req, res) => {
   }
 };
 
-// Update Category
+
 const updateCategory = async (req, res) => {
   try {
     const { id } = req.params;
@@ -85,7 +85,8 @@ const updateCategory = async (req, res) => {
   }
 };
 
-// Delete Category
+
+
 const deleteCategory = async (req, res) => {
   try {
     const { id } = req.params;
@@ -111,9 +112,28 @@ const deleteCategory = async (req, res) => {
   }
 };
 
+
+const categoryFilter=async(req, res)=>{
+  
+  try{
+    const category=req.params.category;
+    const filterItem=Category.find(category)
+
+    res.status(200).json(filterItem)
+  }
+  catch(error){
+res.status(500).json({message: error.message})
+
+  }
+}
+
 module.exports = {
   addCategory,
   getCategories,
   updateCategory,
   deleteCategory,
+  categoryFilter
 };
+
+
+

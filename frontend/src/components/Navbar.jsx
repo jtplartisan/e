@@ -19,7 +19,7 @@ function Navbar() {
   return (
     <nav className="bg-white/80 backdrop-blur-lg shadow-md border-b border-gray-200 px-6 py-3 flex justify-between items-center sticky top-0 z-50">
 
-      {/* LOGO */}
+      
       <Link
         to="/"
         className="text-2xl font-extrabold text-blue-600 tracking-wide"
@@ -27,7 +27,7 @@ function Navbar() {
         🛍️ E-Shop
       </Link>
 
-      {/* LINKS */}
+      
       <div className="flex items-center gap-5">
 
         <Link
@@ -37,14 +37,14 @@ function Navbar() {
           Home
         </Link>
 
-        {/* CUSTOMER */}
+        
         {user?.role === "customer" && (
           <>
             <Link
               to="/dashboard/customer"
               className="text-gray-700 hover:text-blue-600 font-medium transition"
             >
-              Custmer-Panel
+              Customer-Panel
             </Link>
 
             <Link
@@ -54,7 +54,7 @@ function Navbar() {
               Shop
             </Link>
 
-            {/* CART */}
+            
             <Link
               to="/dashboard/cart"
               className="relative text-gray-700 hover:text-blue-600 font-medium transition"
@@ -70,7 +70,7 @@ function Navbar() {
           </>
         )}
 
-        {/* SELLER */}
+        
         {user?.role === "seller" && (
           <Link
             to="/dashboard/seller"
@@ -80,7 +80,7 @@ function Navbar() {
           </Link>
         )}
 
-        {/* ADMIN */}
+        
         {user?.role === "admin" && (
           <Link
             to="/dashboard/admin"
@@ -90,16 +90,16 @@ function Navbar() {
           </Link>
         )}
 
-        {/* USER INFO */}
+        
         {user ? (
           <div className="flex items-center gap-3 ml-4">
 
-            {/* Name */}
+            
             <span className="text-sm font-semibold text-gray-800">
               👤 {user.name}
             </span>
 
-            {/* Role Badge */}
+            
             <span
               className={`text-xs px-2 py-1 rounded-full font-medium ${
                 user.role === "admin"
@@ -112,7 +112,7 @@ function Navbar() {
               {user.role}
             </span>
 
-            {/* Logout */}
+            
             <button
               onClick={handleLogout}
               className="bg-linear-to-r from-red-500 to-red-600 text-white px-4 py-1.5 rounded-lg hover:shadow-lg hover:scale-105 transition"
@@ -145,4 +145,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default Navbar;  

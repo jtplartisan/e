@@ -43,7 +43,7 @@ function Payment() {
       setTimeout(() => {
         setShowSuccess(false);
         setShowContinue(true);
-      }, 1500);
+      }, 1000);
 
     } catch (err) {
       console.log(err);

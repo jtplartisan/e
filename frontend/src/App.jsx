@@ -99,7 +99,7 @@ function App() {
         path="*"
         element={
           <div className="flex items-center justify-center min-h-screen text-2xl font-bold">
-            404 - Page Not Found
+            404 - Page Not Found.
           </div>
         }
       />

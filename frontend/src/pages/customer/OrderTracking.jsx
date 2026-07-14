@@ -64,7 +64,7 @@ function OrderTracking() {
             return (
               <div key={step.key} className="mb-8 ml-6 relative">
 
-                {/* DOT */}
+                
                 <span
                   className={`absolute -left-7.5 flex items-center justify-center w-5 h-5 rounded-full border-2
                   
@@ -111,7 +111,7 @@ function OrderTracking() {
           })}
         </div>
 
-        {/* SUCCESS / FAILURE MESSAGE */}
+        
         {isReturned && (
           <div className="mt-6 p-3 bg-green-50 text-green-700 rounded-lg text-sm">
             This order has been successfully returned.

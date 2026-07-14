@@ -51,6 +51,7 @@ function AddProduct() {
       alert("Product added successfully!");
 
       reset();
+      
       navigate("/dashboard/seller/products");
     } catch (err) {
       console.log("Add product error:", err);
@@ -209,7 +210,7 @@ function AddProduct() {
             </p>
           </div>
 
-          {/* Submit */}
+      
           <button
             type="submit"
             className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition shadow-md"

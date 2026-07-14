@@ -39,12 +39,12 @@ function Register() {
 
       await dispatch(registerUser(userData));
 
-      alert("Account created successfully ✅");
+      alert("Account created successfully ");
 
       navigate("/login");
     } catch (err) {
       console.log("Register error:", err);
-      alert("Registration failed ❌");
+      alert("Registration failed ");
     } finally {
       setLoading(false);
     }
@@ -61,7 +61,7 @@ function Register() {
             </div>
           </div>
 
-          {/* Heading */}
+          
           <h2 className="text-4xl font-bold text-center text-white mb-2">
             Create Account
           </h2>
@@ -74,7 +74,7 @@ function Register() {
             onSubmit={handleSubmit(onSubmit)}
             className="space-y-5"
           >
-            {/* Full Name */}
+            
             <div>
               <div className="relative">
                 <FaUser className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" />
@@ -101,7 +101,7 @@ function Register() {
               )}
             </div>
 
-            {/* Email */}
+            
             <div>
               <div className="relative">
                 <FaEnvelope className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" />
@@ -173,7 +173,7 @@ function Register() {
               )}
             </div>
 
-            {/* Confirm Password */}
+            
             <div>
               <div className="relative">
                 <FaLock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" />
@@ -219,7 +219,7 @@ function Register() {
               )}
             </div>
 
-            {/* Role */}
+            
             <div>
               <select
                 className="w-full py-3 px-4 rounded-xl bg-white text-gray-800 border border-gray-200 outline-none focus:ring-2 focus:ring-green-500"
@@ -245,7 +245,7 @@ function Register() {
               )}
             </div>
 
-            {/* Submit Button */}
+            
             <button
               type="submit"
               disabled={loading}
@@ -261,7 +261,7 @@ function Register() {
             </button>
           </form>
 
-          {/* Divider */}
+          
           <div className="flex items-center my-6">
             <div className="flex-1 h-px bg-white/30"></div>
             <span className="px-4 text-white/70 text-sm">
@@ -270,7 +270,7 @@ function Register() {
             <div className="flex-1 h-px bg-white/30"></div>
           </div>
 
-          {/* Login Link */}
+          
           <p className="text-center text-white">
             Already have an account?{" "}
             <Link

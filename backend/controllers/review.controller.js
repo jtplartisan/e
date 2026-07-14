@@ -1,13 +1,19 @@
 const Review = require("../models/Review");
 
-// Add Review
+
 exports.addReview = async (req, res) => {
   try {
     const { product, rating, comment } = req.body;
 
-    // Check if user already reviewed the product
+    if (!req.user) {
+      return res.status(401).json({
+        success: false,
+        message: "Unauthorized user",
+      });
+    }
+
     const existingReview = await Review.findOne({
-      user: req.user.id,
+      user: req.user._id,
       product,
     });
 
@@ -19,7 +25,7 @@ exports.addReview = async (req, res) => {
     }
 
     const review = await Review.create({
-      user: req.user.id,
+      user: req.user._id,
       product,
       rating,
       comment,
@@ -30,6 +36,7 @@ exports.addReview = async (req, res) => {
       message: "Review added successfully",
       review,
     });
+
   } catch (error) {
     res.status(500).json({
       success: false,
@@ -39,9 +46,9 @@ exports.addReview = async (req, res) => {
 };
 
 
-// Get Reviews of a Product
+
 exports.getProductReviews = async (req, res) => {
-  try {
+  try {  
     const reviews = await Review.find({
       product: req.params.productId,
     }).populate("user", "name email");
@@ -71,7 +78,7 @@ exports.getProductReviews = async (req, res) => {
 
 
 
-// Update Review
+
 exports.updateReview = async (req, res) => {
   try {
     const { rating, comment } = req.body;

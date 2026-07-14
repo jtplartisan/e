@@ -10,29 +10,29 @@ function Sidebar() {
   return (
     <aside className="w-64 h-screen fixed left-0 top-0 bg-gray-900 text-white flex flex-col">
 
-      {/* HEADER */}
+      
       <div className="p-5 border-b border-gray-700">
         <h2 className="text-xl font-bold">PANEL</h2>
       </div>
 
-      {/* SCROLL AREA */}
+      
       <nav className="flex-1 overflow-y-auto px-3 py-4">
 
         <div className="space-y-2">
 
-          {/* CUSTOMER */}
+          
           {role === "customer" && (
             <>
               <SidebarLink to="/dashboard/customer" label="👤 Profile" />
               <SidebarLink to="/dashboard/cart" label="🛒 Cart" />
               <SidebarLink to="/dashboard/my-orders" label="📦 My Orders" />
-              <SidebarLink to="/dashboard/shop" label="🏬 Shop" />
+              
               
             
             </>
           )}
 
-          {/* SELLER */}
+          
           {role === "seller" && (
             <>
               <SidebarLink to="/dashboard/seller" label="📊 Reprts" />
@@ -43,7 +43,7 @@ function Sidebar() {
             </>
           )}
 
-          {/* ADMIN */}
+          
           {role === "admin" && (
             <>
               <SidebarLink to="/dashboard/admin" label="📋 Admin" />
@@ -58,9 +58,9 @@ function Sidebar() {
       </nav>
     </aside>
   );
-}
+} 
 
-/* MENU ITEM */
+
 function SidebarLink({ to, label }) {
   return (
     <Link

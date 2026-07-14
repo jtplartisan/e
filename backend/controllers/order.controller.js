@@ -55,7 +55,7 @@ exports.getMyOrders = async (req, res) => {
       user: req.user._id,
     });
 
-    //  EXTRACT PRODUCT IDS
+    
     const reviewedProductIds = reviews.map((r) =>
       r.product.toString()
     );
@@ -105,6 +105,10 @@ exports.getSellerOrders = async (req, res) => {
 };
 
 
+
+
+
+
 exports.shipOrder = async (req, res) => {
   try {
     const order = await Order.findById(req.params.id);
@@ -123,7 +127,7 @@ exports.shipOrder = async (req, res) => {
     order.orderStatus = "shipped";
     await order.save();
 
-    // STOCK UPDATE
+   
     for (const item of order.items) {
       const productId = item.product;
       console.log(productId);
@@ -217,14 +221,13 @@ exports.deliverOrder = async (req, res) => {
       });
     }
 
-    // Sirf jis customer ne order kiya hai wahi deliver kar sakta hai
+    
     if (order.customer.toString() !== req.user._id.toString()) {
       return res.status(403).json({
         message: "Not authorized",
       });
     }
 
-    // Optional: Sirf shipped order hi delivered ho
     if (order.orderStatus !== "shipped") {
       return res.status(400).json({
         message: "Order is not shipped yet",
@@ -375,7 +378,7 @@ exports.rejectReturn = async (req, res) => {
       return res.status(404).json({ message: "Order not found" });
     }
 
-    // optional security check (recommended)
+    
     if (order.returnStatus !== "requested") {
       return res.status(400).json({
         message: "No return request found",

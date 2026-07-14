@@ -69,7 +69,7 @@ function Shop() {
 
           {filteredProducts.map((p) => (
             <div
-              key={p._id}
+              key={p._id}  
               className="bg-white rounded-2xl shadow-md hover:shadow-2xl transition overflow-hidden group border"
             >
 

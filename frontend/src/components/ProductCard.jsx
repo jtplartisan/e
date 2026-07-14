@@ -11,7 +11,7 @@ import {
 import { addToCart as addToCartAPI } from "../services/cartService";
 import { getProductReviews } from "../services/reviewService";
 
-/* STAR UI */
+
 function Stars({ rating = 0 }) {
   return (
     <div className="flex items-center text-yellow-400 text-sm">
@@ -48,7 +48,7 @@ function ProductCard({ product }) {
 
   const currentQty = cartItem?.quantity || 0;
 
-  // SELLER CHECK ADDED  
+    
   const isSeller = user?.role === "seller"; 
 
   const isOutOfStock = product.stock === 0; 
@@ -69,7 +69,7 @@ function ProductCard({ product }) {
     isDisabled = true;
   }
 
-  // FETCH REVIEWS
+  
   useEffect(() => {
     const fetchReviews = async () => {
       try {
@@ -78,7 +78,7 @@ function ProductCard({ product }) {
 
         setTotalReviews(reviews.length);
 
-        if (reviews.length > 0) {
+        if (reviews.length > 0){
           const avg =
             reviews.reduce((acc, r) => acc + r.rating, 0) /
             reviews.length;
@@ -104,7 +104,7 @@ function ProductCard({ product }) {
       return;
     }
 
-    //EXTRA SAFETY
+    
     if (isSeller) {
       alert("Sellers cannot add items to cart");
       return;
@@ -125,12 +125,12 @@ function ProductCard({ product }) {
   return (
     <div className="group bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100">
 
-      {/* IMAGE */}
-      <div className="relative overflow-hidden">
+      
+      <div className="relative overflow-hidden ">
         <img
           src={product.image}
           alt={product.name}
-          className="h-48 w-full object-cover group-hover:scale-110 transition duration-300"
+          className="h-80 w-full object-contain group-hover:scale-110 transition duration-300"
         />
 
         <span
@@ -150,7 +150,7 @@ function ProductCard({ product }) {
         </span>
       </div>
 
-      {/* CONTENT */}
+      
       <div className="p-4">
 
         <h2 className="text-lg font-semibold text-gray-800 line-clamp-1">
@@ -158,14 +158,18 @@ function ProductCard({ product }) {
         </h2>
 
         <p className="text-xs text-gray-500 mt-1">
-          Sold by: {product.seller?.name || "Admin"}
+          Sold by: {product.seller.name}
         </p>
 
         <p className="text-blue-600 font-bold text-lg mt-1">
           ₹{product.price}
         </p>
 
-        {/* RATING */}
+         <p className="text-blue-600 font-bold text-lg mt-1">
+          {product.category}
+        </p> 
+
+        
         <div className="flex items-center gap-2 mt-1">
           <Stars rating={rating} />
 
@@ -178,7 +182,7 @@ function ProductCard({ product }) {
           </span>
         </div>
 
-        {/* STOCK WARNING */}
+        
         {(isOutOfStock || isLimitReached) && (
           <p
             className={`text-xs mt-2 ${
@@ -191,14 +195,14 @@ function ProductCard({ product }) {
           </p>
         )}
 
-        {/* SELLER WARNING */}
+        
         {isSeller && (
           <p className="text-xs mt-2 text-red-500">
             Sellers are not allowed to purchase products
           </p>
         )}
 
-        {/* ACTIONS */}
+        
         <div className="flex items-center justify-between mt-4">
 
           <Link

@@ -1,6 +1,6 @@
 const Cart = require("../models/Cart");
 
-// ADD TO CART
+
 const addToCart = async (req, res) => {
   try {
     const userId = req.user._id;
@@ -43,7 +43,7 @@ const addToCart = async (req, res) => {
 
 
 
-// REMOVE FROM CART
+
 const removeFromCart = async (req, res) => {
   try {
     const userId = req.user._id;
@@ -77,9 +77,10 @@ const removeFromCart = async (req, res) => {
   }
 };
 
-// CLEAR CART
+
 const clearCart = async (req, res) => {
   try {
+    console.log("h")
     const userId = req.user._id;
 
     const cart = await Cart.findOne({ user: userId });
@@ -108,8 +109,47 @@ const clearCart = async (req, res) => {
   }
 };
 
+
+
+
+const getCart = async (req, res) => {
+  try {
+    const userId = req.user._id;
+
+    const cart = await Cart.findOne({
+      user: userId,
+    }).populate("items.product");
+
+
+    if (!cart) {
+      return res.json({
+        success: true,
+        cart: {
+          items: [],
+        },
+      });
+    }
+
+
+    res.json({
+      success: true,
+      cart,
+    });
+
+
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+
+
 module.exports = {
   addToCart,
   removeFromCart,
   clearCart,
+  getCart
 };

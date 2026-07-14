@@ -26,12 +26,10 @@ function MyOrders() {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // RETURN
   const [showReturnModal, setShowReturnModal] = useState(false);
   const [selectedOrderId, setSelectedOrderId] = useState(null);
   const [reason, setReason] = useState("");
 
-  // REVIEW
   const [showReviewModal, setShowReviewModal] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState(null);
 
@@ -45,16 +43,11 @@ function MyOrders() {
 
   const ordersPerPage = 4;
 
-  // FETCH ORDERS
   const fetchOrders = async () => {
     try {
       const res = await getMyOrders();
-
       setOrders(res?.orders || res || []);
-
-      // ⭐ IMPORTANT: backend must send this
       setReviewedProducts(res?.reviewedProductIds || []);
-
     } catch (err) {
       console.log(err);
       setOrders([]);
@@ -67,7 +60,6 @@ function MyOrders() {
     fetchOrders();
   }, []);
 
-  // ACTIONS
   const handleDeliver = async (id) => {
     await deliverOrder(id);
     fetchOrders();
@@ -78,7 +70,6 @@ function MyOrders() {
     fetchOrders();
   };
 
-  // RETURN
   const openReturnModal = (id) => {
     setSelectedOrderId(id);
     setShowReturnModal(true);
@@ -86,14 +77,12 @@ function MyOrders() {
 
   const handleReturnSubmit = async () => {
     if (!reason) return alert("Enter reason");
-
     await returnOrder(selectedOrderId, reason);
     setShowReturnModal(false);
     setReason("");
     fetchOrders();
   };
 
-  // REVIEW
   const openReviewModal = (productId) => {
     setSelectedProductId(productId);
     setRating(1);
@@ -109,9 +98,6 @@ function MyOrders() {
         comment,
       });
 
-      alert("Review submitted");
-
-      // prevent duplicate locally
       setReviewedProducts((prev) =>
         prev.includes(selectedProductId)
           ? prev
@@ -124,19 +110,17 @@ function MyOrders() {
     }
   };
 
-  // FILTER
   const filteredOrders = orders.filter((order) => {
     const productName =
       order.items?.map((i) => i.product?.name).join(" ") || "";
 
     return (
-      order._id.toLowerCase().includes(search.toLowerCase()) ||
+      order._id?.toLowerCase().includes(search.toLowerCase()) ||
       productName.toLowerCase().includes(search.toLowerCase()) ||
-      order.orderStatus.toLowerCase().includes(search.toLowerCase())
+      order.orderStatus?.toLowerCase().includes(search.toLowerCase())
     );
   });
 
-  // PAGINATION
   const indexOfLast = currentPage * ordersPerPage;
   const indexOfFirst = indexOfLast - ordersPerPage;
   const currentOrders = filteredOrders.slice(indexOfFirst, indexOfLast);
@@ -151,8 +135,6 @@ function MyOrders() {
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
-
-      {/* HEADER */}
       <div className="max-w-6xl mx-auto mb-6">
         <h1 className="text-3xl font-bold">My Orders</h1>
 
@@ -164,48 +146,46 @@ function MyOrders() {
         />
       </div>
 
-      {/* ORDERS */}
       <div className="max-w-6xl mx-auto space-y-4">
-
         {currentOrders.map((order) => (
           <div key={order._id} className="bg-white p-5 rounded-xl shadow">
-
             <p className="text-sm text-gray-500">Order ID: {order._id}</p>
             <p className="font-bold text-lg">₹{order.totalAmount}</p>
             <p>Status: {order.orderStatus}</p>
 
-            {/* ITEMS */}
             <div className="mt-3 space-y-2">
-              {order.items?.map((item) => (
-                <div
-                  key={item.product._id}
-                  className="flex justify-between items-center border-b py-2"
-                >
-                  <span>{item.product?.name}</span>
+              {order.items?.map((item, idx) => {
+                if (!item?.product) return null;
 
-                  {order.orderStatus === "delivered" &&
-                  !reviewedProducts.includes(item.product._id) && (
-                    <button
-                      onClick={() => openReviewModal(item.product._id)}
-                      className="px-3 py-1 bg-blue-600 text-white rounded-full text-sm"
-                    >
-                      ⭐ Give Review
-                    </button>
-                  )}
+                return (
+                  <div
+                    key={item.product._id || idx}
+                    className="flex justify-between items-center border-b py-2"
+                  >
+                    <span>{item.product?.name}</span>
 
-                  {order.orderStatus === "delivered" &&
-                  reviewedProducts.includes(item.product._id) && (
-                    <span className="px-3 py-1 bg-green-100 text-green-700 text-xs rounded-full">
-                      ✔ Reviewed
-                    </span>
-                  )}
-                </div>
-              ))}
+                    {order.orderStatus === "delivered" &&
+                      !reviewedProducts.includes(item.product._id) && (
+                        <button
+                          onClick={() => openReviewModal(item.product._id)}
+                          className="px-3 py-1 bg-blue-600 text-white rounded-full text-sm"
+                        >
+                          ⭐ Give Review
+                        </button>
+                      )}
+
+                    {order.orderStatus === "delivered" &&
+                      reviewedProducts.includes(item.product._id) && (
+                        <span className="px-3 py-1 bg-green-100 text-green-700 text-xs rounded-full">
+                          ✔ Reviewed
+                        </span>
+                      )}
+                  </div>
+                );
+              })}
             </div>
 
-            {/* ACTIONS */}
             <div className="flex gap-2 mt-4">
-
               <Link
                 to={`/dashboard/order/${order._id}`}
                 className="px-3 py-1 bg-black text-white rounded"
@@ -214,33 +194,39 @@ function MyOrders() {
               </Link>
 
               {order.orderStatus === "processing" && (
-                <button onClick={() => handleCancel(order._id)} className="bg-red-500 text-white px-3 py-1 rounded">
+                <button
+                  onClick={() => handleCancel(order._id)}
+                  className="bg-red-500 text-white px-3 py-1 rounded"
+                >
                   Cancel
                 </button>
               )}
 
               {order.orderStatus === "shipped" && (
-                <button onClick={() => handleDeliver(order._id)} className="bg-green-600 text-white px-3 py-1 rounded">
+                <button
+                  onClick={() => handleDeliver(order._id)}
+                  className="bg-green-600 text-white px-3 py-1 rounded"
+                >
                   Mark Delivered
                 </button>
               )}
 
               {order.orderStatus === "delivered" && (
-                <button onClick={() => openReturnModal(order._id)} className="bg-orange-500 text-white px-3 py-1 rounded">
+                <button
+                  onClick={() => openReturnModal(order._id)}
+                  className="bg-orange-500 text-white px-3 py-1 rounded"
+                >
                   Return
                 </button>
               )}
-
             </div>
           </div>
         ))}
       </div>
 
-      {/* RETURN MODAL */}
       {showReturnModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
           <div className="bg-white p-5 rounded-xl w-96">
-
             <h2 className="text-lg font-bold mb-3">Return Order</h2>
 
             <textarea
@@ -251,7 +237,10 @@ function MyOrders() {
             />
 
             <div className="flex justify-end gap-2 mt-3">
-              <button onClick={() => setShowReturnModal(false)}>Cancel</button>
+              <button onClick={() => setShowReturnModal(false)}>
+                Cancel
+              </button>
+
               <button
                 onClick={handleReturnSubmit}
                 className="bg-orange-500 text-white px-3 py-1 rounded"
@@ -259,22 +248,19 @@ function MyOrders() {
                 Submit
               </button>
             </div>
-
           </div>
         </div>
       )}
 
-      {/* REVIEW MODAL */}
       {showReviewModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
           <div className="bg-white p-5 rounded-xl w-96">
-
             <h2 className="text-lg font-bold mb-3">Write Review</h2>
 
             <div className="mb-3">
               <StarRating rating={rating} setRating={setRating} />
               <p className="text-sm text-gray-500">{rating}/5</p>
-            </div>
+            </div>                       
 
             <textarea
               value={comment}
@@ -293,13 +279,13 @@ function MyOrders() {
                 className="bg-blue-600 text-white px-3 py-1 rounded"
               >
                 Submit
-              </button>
-            </div>
+              </button>0
 
+
+            </div>
           </div>
         </div>
       )}
-
     </div>
   );
 }

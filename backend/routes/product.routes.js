@@ -23,6 +23,9 @@ router.get("/my-products", authMiddleware, getMyProducts);
 
 router.get("/:id", getProduct);
 
+router.get("/", getProducts);
+
+
 router.post(
   "/",
   authMiddleware,

@@ -8,7 +8,7 @@ exports.getSellerProducts = async (req, res) => {
   });
 
   res.json(products);
-};
+}; 
 
 exports.getSellerOrders = async (req, res) => {
   try {
@@ -46,6 +46,8 @@ exports.getSellerOrders = async (req, res) => {
   }
 };
 
+
+
 exports.shipOrder = async (req, res) => {
   try {
     
@@ -59,11 +61,11 @@ exports.shipOrder = async (req, res) => {
       return res.status(400).json({ message: "Already shipped" });
     }
 
-    // update status
+   
     order.orderStatus = "shipped";
     await order.save();
 
-    // stock decrease
+   
     for (const item of order.items) {
       await Product.findByIdAndUpdate(
         item.product,
@@ -78,25 +80,14 @@ exports.shipOrder = async (req, res) => {
 
   } catch (error) {
     res.status(500).json({ message: error.message });
+    
   }
 };
 
 
-cartItems=async()=>{
-  
-
-  try{
-    const userId="6a3e6c865bb5dfca7167ac03";
-    const items=Cart.findById(userId)
-    for(const item of items)
-    console.log(item);
 
 
-  }
 
-  catch{
 
-  }
-}
 
-cartItems()
+

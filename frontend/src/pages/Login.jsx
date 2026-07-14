@@ -45,7 +45,7 @@ function Login() {
         return;
       }
 
-      // success handled by useEffect redirect
+      
 
     } catch (err) {
       console.log("Login error:", err);
@@ -60,17 +60,17 @@ function Login() {
 
       <div className="w-full max-w-md">
 
-        {/* CARD */}
+        
         <div className="bg-white/15 backdrop-blur-xl border border-white/20 shadow-2xl rounded-3xl p-8">
 
-          {/* LOGO */}
+          
           <div className="flex justify-center mb-5">
             <div className="w-20 h-20 rounded-full bg-white flex items-center justify-center shadow-lg">
               <span className="text-3xl">🛍️</span>
             </div>
           </div>
 
-          {/* TITLE */}
+          
           <h2 className="text-4xl font-bold text-center text-white mb-2">
             Welcome Back
           </h2>
@@ -79,10 +79,10 @@ function Login() {
             Login to continue shopping
           </p>
 
-          {/* FORM */}
+          
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
 
-            {/* EMAIL */}
+            
             <div>
               <div className="relative">
                 <FaEnvelope className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" />
@@ -108,7 +108,7 @@ function Login() {
               )}
             </div>
 
-            {/* PASSWORD */}
+            
             <div>
               <div className="relative">
                 <FaLock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" />
@@ -142,7 +142,7 @@ function Login() {
               )}
             </div>
 
-            {/* FORGOT */}
+            
             <div className="flex justify-end">
               <Link
                 to="/forgot-password"
@@ -152,7 +152,7 @@ function Login() {
               </Link>
             </div>
 
-            {/* BUTTON */}
+            
             <button
               type="submit"
               disabled={loading}
@@ -167,14 +167,14 @@ function Login() {
 
           </form>
 
-          {/* DIVIDER */}
+          
           <div className="flex items-center my-6">
             <div className="flex-1 h-px bg-white/30"></div>
             <span className="px-4 text-white/70 text-sm">OR</span>
             <div className="flex-1 h-px bg-white/30"></div>
           </div>
 
-          {/* REGISTER */}
+          
           <p className="text-center text-white">
             Don't have an account?{" "}
             <Link

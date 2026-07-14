@@ -6,6 +6,7 @@ const {
   getCategories,
   updateCategory,
   deleteCategory,
+  categoryFilter
 } = require("../controllers/category.controller");
 
 const authMiddleware = require("../middleware/auth.middleware");
@@ -22,4 +23,6 @@ router.put("/:id", authMiddleware, updateCategory);
 // Delete Category
 router.delete("/:id", authMiddleware, deleteCategory);
 
-module.exports = router;
+router.get("/filter",categoryFilter)
+
+module.exports = router;   

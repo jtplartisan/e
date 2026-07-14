@@ -194,7 +194,7 @@ function ProductDetails() {
               {rating}/5
             </p>
 
-            <textarea
+            <textarea 
               value={comment}
               onChange={(e) => setComment(e.target.value)}
               placeholder="Write your review..."

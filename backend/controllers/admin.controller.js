@@ -2,11 +2,17 @@ const User = require("../models/User");
 const Product = require("../models/Product");
 const Order = require("../models/Order");
 
+
+
+
 exports.getAllUsers = async (req, res) => {
   const users = await User.find();
 
   res.json(users);
-};
+}; 
+
+
+
 
 exports.blockUser = async (req, res) => {
   const user = await User.findById(req.params.id);
@@ -21,10 +27,14 @@ exports.blockUser = async (req, res) => {
   });
 };
 
+
+
+
+
 exports.unblockUser = async (req, res) => {
   const user = await User.findById(req.params.id);
 
-  user.isBlocked = false;
+  user.isBlocked = false; 
 
   await user.save();
 
@@ -33,6 +43,10 @@ exports.unblockUser = async (req, res) => {
     message: "User unblocked",
   });
 };
+
+
+
+
 
 exports.getDashboardStats = async (req, res) => {
   const totalCustomers = await User.countDocuments({
@@ -48,9 +62,9 @@ exports.getDashboardStats = async (req, res) => {
   const totalOrders = await Order.countDocuments();
 
   res.json({  
-    totalCustomers,
+    totalCustomers,         
     totalSellers,
     totalProducts,
     totalOrders,
   });
-};
+};   
