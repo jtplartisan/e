@@ -80,7 +80,7 @@ const removeFromCart = async (req, res) => {
 
 const clearCart = async (req, res) => {
   try {
-    console.log("h")
+    
     const userId = req.user._id;
 
     const cart = await Cart.findOne({ user: userId });
@@ -108,6 +108,7 @@ const clearCart = async (req, res) => {
     });
   }
 };
+
 
 
 

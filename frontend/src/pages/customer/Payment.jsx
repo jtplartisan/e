@@ -13,7 +13,7 @@ function Payment() {
   const [order, setOrder] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  // UI MODALS
+  
   const [showSuccess, setShowSuccess] = useState(false);
   const [showContinue, setShowContinue] = useState(false);
   const [error, setError] = useState("");
@@ -88,7 +88,7 @@ function Payment() {
 
       </div>
 
-      {/*  ERROR MODAL */}
+      
       {error && (
         <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center">
           <div className="bg-white p-6 rounded shadow text-center">
@@ -105,7 +105,7 @@ function Payment() {
         </div>
       )}
 
-      {/* ✅ SUCCESS MODAL */}
+      
       {showSuccess && (
         <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center">
           <div className="bg-white p-6 rounded shadow text-center">
@@ -117,7 +117,7 @@ function Payment() {
         </div>
       )}
 
-      {/* 🔁 CONTINUE SHOPPING MODAL */}
+      
       {showContinue && (
         <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center">
           <div className="bg-white p-6 rounded shadow text-center">

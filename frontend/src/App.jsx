@@ -30,6 +30,7 @@ import Shop from "./pages/customer/Shop";
 import MyOrders from "./pages/customer/MyOrders";
 import Profile from "./pages/customer/Profile";
 import OrderTracking from "./pages/customer/OrderTracking";
+import Wishlist from "./pages/customer/WishList";
 
 //SELLER
 import SellerDashboard from "./pages/seller/SellerDashboard";
@@ -74,6 +75,8 @@ function App() {
         <Route path="my-orders" element={<MyOrders />} />
         <Route path="profile" element={<Profile />} />
        <Route path="order/:id" element={<OrderTracking />} />
+       <Route path="wishlist" element={<Wishlist />} />
+
         {/* SELLER */}
         <Route path="seller" element={<SellerDashboard />} />
         <Route path="seller/products" element={<SellerProducts />} />

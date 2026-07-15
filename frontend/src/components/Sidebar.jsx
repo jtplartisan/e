@@ -26,6 +26,7 @@ function Sidebar() {
               <SidebarLink to="/dashboard/customer" label="👤 Profile" />
               <SidebarLink to="/dashboard/cart" label="🛒 Cart" />
               <SidebarLink to="/dashboard/my-orders" label="📦 My Orders" />
+              <SidebarLink to="/dashboard/wishlist" label=" ❤️ My WishList" />
               
               
             

@@ -34,7 +34,7 @@ function SellerProducts() {
     navigate(`/dashboard/seller/edit-product/${id}`);
   };
 
-  // 🔍 SEARCH FILTER
+  //  SEARCH FILTER
   const filteredProducts = products.filter((p) => {
     return (
       p.name?.toLowerCase().includes(search.toLowerCase()) ||
@@ -71,7 +71,7 @@ function SellerProducts() {
           </div>
         </div>
 
-        {/* 🔍 SEARCH BAR */}
+        {/*  SEARCH BAR */}
         <div className="bg-white p-4 rounded-xl shadow mb-6 flex items-center gap-3">
           <Search className="text-gray-400" />
 
@@ -155,7 +155,7 @@ function SellerProducts() {
                           onClick={() => handleEdit(product._id)}
                           className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition"
                         >
-                          <Pencil size={16} />
+                        <Pencil size={16} />
                           Edit
                         </button>
 
